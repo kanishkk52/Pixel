@@ -8,7 +8,7 @@ const [playing,setPlaying] = useState(true)
 
 useEffect(()=>{
 
-audioRef.current = new Audio("public/music/lobby.mp3")
+audioRef.current = new Audio("https://res.cloudinary.com/dwk329jcv/video/upload/v1773513792/lobby_cco1nd.mp3")
 audioRef.current.loop = true
 audioRef.current.volume = 0.4
 
