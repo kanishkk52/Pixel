@@ -8,7 +8,7 @@ const team = [
 name:"Kanishk",
 title:"Lead Photographer & Designer",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"public/team/member1_alt.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
 bio:`Notice who isn’t in any of the photos? Yep — that’s me.
 While everyone else is busy posing, I’m the one behind the lens capturing the moment before it disappears.
 As Pixel’s lead photographer and designer, I turn everyday moments into visuals worth remembering.`
@@ -18,7 +18,7 @@ As Pixel’s lead photographer and designer, I turn everyday moments into visual
 name:"Member Two",
 title:"Creative Director",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"public/team/member1_alt.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
 bio:`The one making sure every project has a visual story. From concept to final frame, they guide the creative direction of Pixel.`
 },
 
@@ -26,23 +26,23 @@ bio:`The one making sure every project has a visual story. From concept to final
 name:"Member Three",
 title:"Visual Editor",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"public/team/member1_alt.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
 bio:`Turning raw shots into polished visuals. Color grading, retouching, and consistency — the magic that happens after the shutter clicks.`
 },
 
 {
 name:"Member Four",
 title:"Social Media Strategist",
-image:"public/team/member1.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
 bio:`Making sure our visuals reach the right audience at the right time.`
 },
 
 {
 name:"Member Five",
 title:"Content Curator",
-image:"public/team/member1.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
 bio:`Selecting the moments that matter. From hundreds of frames to the final highlight reel.`
 }
 
