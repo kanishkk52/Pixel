@@ -23,7 +23,7 @@ Amazing moments from today's meetup.
 </p>
 
 <img
-src="public/photos/photo1.jpg"
+src="https://res.cloudinary.com/dwk329jcv/image/upload/v1773512354/photo6_p5lng5.jpg"
 className="rounded-lg"
 />
 
@@ -54,7 +54,7 @@ Amazing moments from today's meetup.
 </p>
 
 <img
-src="public/photos/photo2.jpg"
+src="https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo2_pflffl.jpg"
 className="rounded-lg"
 />
 
@@ -85,7 +85,7 @@ Amazing moments from today's meetup.
 </p>
 
 <img
-src="public/photos/photo3.jpg"
+src="https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg"
 className="rounded-lg"
 />
 
