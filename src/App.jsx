@@ -6,7 +6,7 @@ import Login from "./pages/Login"
 import Newsletter from "./pages/Newsletter"
 import Profile from "./pages/Profile"
 import Navbar from "./components/Navbar"
-import MusicToggle from "./components/MusicToggle"
+
 import ThemeToggle from "./components/ThemeToggle"
 function Layout(){
 
@@ -18,7 +18,7 @@ function Layout(){
   return (
     <>
       {!hideNavbar && <Navbar />}
-      <MusicToggle/>        
+         
       <ThemeToggle/>
       <Routes>
         <Route path="/" element={<Home />} />
