@@ -4,7 +4,7 @@ import Home from "./pages/Home"
 import Feed from "./pages/Feed"
 import Login from "./pages/Login"
 import Newsletter from "./pages/Newsletter"
-
+import Profile from "./pages/Profile"
 import Navbar from "./components/Navbar"
 import MusicToggle from "./components/MusicToggle"
 import ThemeToggle from "./components/ThemeToggle"
@@ -25,6 +25,7 @@ function Layout(){
         <Route path="/login" element={<Login />} />
         <Route path="/feed" element={<Feed />} />
         <Route path="/newsletter" element={<Newsletter />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
   )

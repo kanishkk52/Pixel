@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import TeamParticles from "../components/TeamParticles"
 import { GoogleLogin } from "@react-oauth/google"
-import {jwtDecode} from "jwt-decode"
-
+import { jwtDecode } from "jwt-decode"
 
 export default function Login(){
 
@@ -21,6 +20,17 @@ const domain = email.split("@")[1]
 if(allowedDomains.includes(domain)){
 
 console.log("Allowed user:", email)
+
+// save user so Navbar + Profile can access it
+const user = {
+name: decoded.name,
+email: decoded.email,
+picture: decoded.picture,
+domain: "sait.ac.in"
+}
+
+localStorage.setItem("pixelUser", JSON.stringify(user))
+
 navigate("/feed")
 
 }else{
