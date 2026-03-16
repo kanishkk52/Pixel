@@ -86,10 +86,7 @@ setPosts(cleaned)
 
 localStorage.setItem("pixelPosts", JSON.stringify(cleaned))
 
-/* UPDATE SAVED POSTS FOR PROFILE */
-
 const saved = cleaned.filter(p => p.saved)
-
 localStorage.setItem("pixelSaved", JSON.stringify(saved))
 
 }
@@ -272,17 +269,17 @@ updatePosts(updated)
 
 return(
 
-<div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+<div className="min-h-screen bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">
 
 <h1 className="text-4xl text-center pt-20 font-introducing">
 Event Feed
 </h1>
 
-<div className="max-w-4xl mx-auto mt-16 space-y-16">
+<div className="max-w-4xl mx-auto mt-16 space-y-16 px-4">
 
 {posts.map(post=>(
 
-<div key={post.id} className="flex gap-6 items-start">
+<div key={post.id} className="flex flex-col md:flex-row gap-6 items-start">
 
 {/* POST */}
 
@@ -296,15 +293,13 @@ Event Feed
 {post.text}
 </p>
 
-<img src={post.image} className="rounded-lg"/>
+<img src={post.image} className="w-full rounded-lg"/>
 
 {/* ACTION BAR */}
 
 <div className="flex items-center justify-between mt-4">
 
 <div className="flex gap-4">
-
-{/* LIKE */}
 
 <div className="relative">
 
@@ -361,7 +356,7 @@ ${post.saved ? "text-blue-600" : ""}
 
 {post.showComments && (
 
-<div className="w-80 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4 space-y-4">
+<div className="w-full md:w-80 border border-neutral-200 dark:border-neutral-800 rounded-xl p-4 space-y-4">
 
 <h3 className="font-semibold">Comments</h3>
 
@@ -378,10 +373,8 @@ ${post.saved ? "text-blue-600" : ""}
 
 <button
 onClick={()=>{
-
 const reply = prompt("Reply")
 if(reply) addReply(post.id,comment.id,reply)
-
 }}
 className="opacity-60 hover:opacity-100"
 >
