@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-
 import { useNavigate } from "react-router-dom"
+import ImageViewer from "./ImageViewer"
 
 export default function Profile(){
 
@@ -8,23 +8,27 @@ const navigate = useNavigate()
 
 const [user,setUser] = useState(null)
 const [savedPosts,setSavedPosts] = useState([])
+const [savedImages,setSavedImages] = useState([])
+
+const [viewer,setViewer] = useState(null)
+const [postViewer,setPostViewer] = useState(null)
 
 /* LOGOUT */
 
 const handleLogout = () => {
 
 window.localStorage.removeItem("pixelUser")
-
-// trigger navbar update
 window.dispatchEvent(new Event("storage"))
 
 navigate("/")
 
 }
 
-/* LOAD USER + SAVED POSTS */
+/* LOAD USER + SAVED DATA */
 
 useEffect(()=>{
+
+const loadData = () => {
 
 const storedUser = localStorage.getItem("pixelUser")
 
@@ -33,7 +37,23 @@ setUser(JSON.parse(storedUser))
 }
 
 const saved = JSON.parse(localStorage.getItem("pixelSaved")) || []
-setSavedPosts(saved)
+
+const posts = saved.filter(item => item.type !== "image")
+
+const images = saved
+.filter(item => item.type === "image")
+.map(item => item.image)
+
+setSavedPosts(posts)
+setSavedImages(images)
+
+}
+
+loadData()
+
+window.addEventListener("storage",loadData)
+
+return ()=>window.removeEventListener("storage",loadData)
 
 },[])
 
@@ -87,7 +107,7 @@ Logout
 
 <div className="flex gap-6 mt-4 text-sm text-gray-700 dark:text-gray-300">
 
-<span><b>{savedPosts.length}</b> Saves</span>
+<span><b>{savedPosts.length + savedImages.length}</b> Saves</span>
 <span><b>0</b> Followers</span>
 <span><b>0</b> Following</span>
 
@@ -97,15 +117,48 @@ Logout
 
 </div>
 
-{/* SAVED SECTION */}
+{/* SAVED PHOTOS */}
 
 <div className="mt-14">
 
 <h2 className="text-xl mb-6 text-gray-800 dark:text-gray-200">
-Saved
+Saved Photos
 </h2>
 
-{/* SAVED GRID */}
+{savedImages.length === 0 ? (
+
+<p className="text-gray-500 dark:text-gray-400">
+No saved images yet.
+</p>
+
+) : (
+
+<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+{savedImages.map((img,i)=>(
+
+<img
+key={i}
+src={img}
+onClick={()=>setViewer(i)}
+className="h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
+/>
+
+))}
+
+</div>
+
+)}
+
+</div>
+
+{/* SAVED POSTS */}
+
+<div className="mt-16">
+
+<h2 className="text-xl mb-6 text-gray-800 dark:text-gray-200">
+Saved Posts
+</h2>
 
 {savedPosts.length === 0 ? (
 
@@ -117,12 +170,13 @@ No saved posts yet.
 
 <div className="grid grid-cols-3 gap-4">
 
-{savedPosts.map(post => (
+{savedPosts.map((post,i)=>(
 
 <img
 key={post.id}
 src={post.image}
-className="h-40 w-full object-cover rounded-xl hover:scale-[1.02] transition"
+onClick={()=>setPostViewer(i)}
+className="h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
 />
 
 ))}
@@ -132,6 +186,30 @@ className="h-40 w-full object-cover rounded-xl hover:scale-[1.02] transition"
 )}
 
 </div>
+
+{/* IMAGE VIEWER FOR GALLERY PHOTOS */}
+
+{viewer !== null && (
+
+<ImageViewer
+images={savedImages}
+index={viewer}
+setViewer={setViewer}
+/>
+
+)}
+
+{/* IMAGE VIEWER FOR FEED POSTS */}
+
+{postViewer !== null && (
+
+<ImageViewer
+images={savedPosts.map(p => p.image)}
+index={postViewer}
+setViewer={setPostViewer}
+/>
+
+)}
 
 </div>
 
