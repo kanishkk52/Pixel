@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 export default function Navbar(){
 
 const [user,setUser] = useState(null)
-const [open,setOpen] = useState(false)
 const navigate = useNavigate()
+
+/* LOAD USER */
 
 useEffect(()=>{
 
@@ -14,33 +15,42 @@ const loadUser = () => {
 const storedUser = window.localStorage.getItem("pixelUser")
 
 if(storedUser){
-  setUser(JSON.parse(storedUser))
+setUser(JSON.parse(storedUser))
 }else{
-  setUser(null)
+setUser(null)
 }
 
 }
 
+/* run immediately */
 loadUser()
 
+/* listen for changes */
 window.addEventListener("storage", loadUser)
+window.addEventListener("userChanged", loadUser)
 
 return ()=>{
 window.removeEventListener("storage", loadUser)
+window.removeEventListener("userChanged", loadUser)
 }
 
 },[])
 
+/* LOGOUT */
+
 const handleLogout = () => {
 
 window.localStorage.removeItem("pixelUser")
+
+/* trigger updates everywhere */
 window.dispatchEvent(new Event("storage"))
+window.dispatchEvent(new Event("userChanged"))
 
 navigate("/")
 
 }
 
-/* ring color */
+/* RING COLOR */
 
 const getRingColor = () => {
 
@@ -59,38 +69,42 @@ return(
 
 <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
 
+{/* LOGO */}
+
 <Link to="/" className="font-headersfont text-xl">
 Pixel
 </Link>
 
+{/* NAV LINKS */}
+
 <div className="flex items-center gap-6">
 
-<Link to="/">Home</Link>
-<Link to="/feed">Feed</Link>
-<Link to="/newsletter">Newsletter</Link>
+<Link to="/" className="hover:text-blue-600 transition">
+Home
+</Link>
+
+<Link to="/feed" className="hover:text-blue-600 transition">
+Feed
+</Link>
+
+<Link to="/gallery" className="hover:text-blue-600 transition">
+Gallery
+</Link>
+
+<Link to="/newsletter" className="hover:text-blue-600 transition">
+Newsletter
+</Link>
 
 {/* PROFILE */}
 
 {user && (
 
-<div
-className="relative flex items-center"
-onMouseEnter={()=>setOpen(true)}
-onMouseLeave={()=>setOpen(false)}
->
-
-{/* PROFILE IMAGE */}
-
 <img
-src={user.picture + "?sz=200"}
+src={user.picture}
 alt="profile"
 onClick={()=>navigate("/profile")}
-className={`w-9 h-9 rounded-full cursor-pointer ring-2 ring-offset-2 ring-offset-white dark:ring-offset-black ${getRingColor()} hover:scale-105 transition`}
+className={`w-9 h-9 rounded-full cursor-pointer object-cover ring-2 ring-offset-2 ring-offset-white dark:ring-offset-black ${getRingColor()} hover:scale-105 transition`}
 />
-
-
-
-</div>
 
 )}
 
