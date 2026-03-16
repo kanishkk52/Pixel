@@ -42,7 +42,6 @@ const handleLogout = () => {
 
 window.localStorage.removeItem("pixelUser")
 
-/* trigger updates everywhere */
 window.dispatchEvent(new Event("storage"))
 window.dispatchEvent(new Event("userChanged"))
 
@@ -65,9 +64,9 @@ return "ring-neutral-400"
 
 return(
 
-<nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 dark:bg-black/70 border-b border-neutral-200 dark:border-neutral-800 dark:text-white">
+<nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 dark:bg-black/70 border-b border-neutral-200 dark:border-neutral-800 dark:text-white overflow-x-hidden">
 
-<div className="max-w-7xl mx-auto flex justify-between items-center p-4">
+<div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3">
 
 {/* LOGO */}
 
@@ -77,21 +76,21 @@ Pixel
 
 {/* NAV LINKS */}
 
-<div className="flex items-center gap-6">
+<div className="flex items-center gap-4 md:gap-6">
 
-<Link to="/" className="hover:text-blue-600 transition">
+<Link to="/" className="hover:text-blue-600 transition text-sm md:text-base">
 Home
 </Link>
 
-<Link to="/feed" className="hover:text-blue-600 transition">
+<Link to="/feed" className="hover:text-blue-600 transition text-sm md:text-base">
 Feed
 </Link>
 
-<Link to="/gallery" className="hover:text-blue-600 transition">
+<Link to="/gallery" className="hover:text-blue-600 transition text-sm md:text-base">
 Gallery
 </Link>
 
-<Link to="/newsletter" className="hover:text-blue-600 transition">
+<Link to="/newsletter" className="hover:text-blue-600 transition text-sm md:text-base">
 Newsletter
 </Link>
 
@@ -103,7 +102,7 @@ Newsletter
 src={user.picture}
 alt="profile"
 onClick={()=>navigate("/profile")}
-className={`w-9 h-9 rounded-full cursor-pointer object-cover ring-2 ring-offset-2 ring-offset-white dark:ring-offset-black ${getRingColor()} hover:scale-105 transition`}
+className={`w-8 h-8 md:w-9 md:h-9 rounded-full cursor-pointer object-cover ring-2 ring-offset-1 md:ring-offset-2 ring-offset-white dark:ring-offset-black ${getRingColor()} hover:scale-105 transition`}
 />
 
 )}

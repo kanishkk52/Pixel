@@ -98,3 +98,8 @@ to { transform: translateX(0); opacity:1 }
 .animate-slideIn {
 animation: slideIn 0.25s ease;
 }
+
+
+body{
+overflow-x:hidden;
+}
