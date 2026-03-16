@@ -79,20 +79,24 @@ if(!user) return <div className="p-10">Not logged in</div>
 
 return(
 
-<div className="min-h-screen pt-24 px-6 bg-white text-black dark:bg-black dark:text-white">
+<div className="min-h-screen bg-white dark:bg-black text-black dark:text-white overflow-x-hidden">
+
+<div className="pt-24 px-4 md:px-6 max-w-6xl mx-auto">
 
 {/* HEADER */}
 
-<div className="flex items-center gap-8">
+<div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8">
 
 <img
 src={user.picture}
-className={`w-28 h-28 rounded-full ring-4 ring-offset-4 ring-offset-white dark:ring-offset-black ${getRingColor()}`}
+className={`w-24 h-24 md:w-28 md:h-28 rounded-full ring-4 ring-offset-4 ring-offset-white dark:ring-offset-black ${getRingColor()}`}
 />
 
-<div>
+<div className="text-center md:text-left">
 
-<h1 className="text-3xl font-headersfont">{user.name}</h1>
+<h1 className="text-2xl md:text-3xl font-headersfont">
+{user.name}
+</h1>
 
 <p className="text-gray-600 dark:text-gray-400 font-buttonsfont">
 {user.email}
@@ -100,12 +104,12 @@ className={`w-28 h-28 rounded-full ring-4 ring-offset-4 ring-offset-white dark:r
 
 <button
 onClick={handleLogout}
-className="mt-6 px-6 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition text-red-600"
+className="mt-5 px-6 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition text-red-600"
 >
 Logout
 </button>
 
-<div className="flex gap-6 mt-4 text-sm text-gray-700 dark:text-gray-300">
+<div className="flex justify-center md:justify-start gap-6 mt-4 text-sm text-gray-700 dark:text-gray-300">
 
 <span><b>{savedPosts.length + savedImages.length}</b> Saves</span>
 <span><b>0</b> Followers</span>
@@ -141,7 +145,7 @@ No saved images yet.
 key={i}
 src={img}
 onClick={()=>setViewer(i)}
-className="h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
+className="h-36 md:h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
 />
 
 ))}
@@ -168,7 +172,7 @@ No saved posts yet.
 
 ) : (
 
-<div className="grid grid-cols-3 gap-4">
+<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
 {savedPosts.map((post,i)=>(
 
@@ -176,7 +180,7 @@ No saved posts yet.
 key={post.id}
 src={post.image}
 onClick={()=>setPostViewer(i)}
-className="h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
+className="h-36 md:h-40 w-full object-cover rounded-xl cursor-pointer hover:scale-[1.02] transition"
 />
 
 ))}
@@ -212,7 +216,7 @@ setViewer={setPostViewer}
 )}
 
 </div>
-
+</div>
 )
 
 }
