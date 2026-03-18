@@ -8,7 +8,9 @@ import Profile from "./pages/Profile"
 import Gallery from "./pages/Gallery"
 import EventGallery from "./pages/EventGallery"
 import ImageViewer from "./pages/ImageViewer"
-
+import FaceSetup from "./components/FaceSetup"
+import FaceFilter from "./components/FaceFilter"
+import UsernameSetup from "./pages/UsernameSetup"
 import Navbar from "./components/Navbar"
 
 import ThemeToggle from "./components/ThemeToggle"
@@ -32,6 +34,9 @@ function Layout(){
         <Route path="/profile" element={<Profile />} />
         <Route path="/gallery" element={<Gallery/>}/>
         <Route path="/gallery/:id" element={<EventGallery/>}/>
+        <Route path="/face-setup" element={<FaceSetup/>} />
+        <Route path="/face-filter" element={<FaceFilter/>} />
+        <Route path="/username" element={<UsernameSetup />} />
         
 
 

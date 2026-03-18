@@ -31,7 +31,7 @@ domain: "sait.ac.in"
 
 localStorage.setItem("pixelUser", JSON.stringify(user))
 
-navigate("/feed")
+navigate("/username")
 
 }else{
 
