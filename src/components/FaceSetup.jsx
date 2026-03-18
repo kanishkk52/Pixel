@@ -104,11 +104,11 @@ return(
 
 <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-white dark:bg-black text-black dark:text-white">
 
-<h1 className="text-3xl mb-4 text-center">
+<h1 className="text-3xl mb-4 text-center font-headersfont">
 Set Up Face Recognition
 </h1>
 
-<p className="text-gray-500 text-center max-w-md mb-8">
+<p className="text-gray-500 text-center max-w-md mb-8 font-buttonsfont">
 Capture your face so we can find your photos later. You can skip this.
 </p>
 
@@ -134,7 +134,7 @@ className="rounded-xl w-full h-64 object-cover bg-black"
 />
 ) : (
 <div className="h-64 flex items-center justify-center border rounded-xl border-neutral-300 dark:border-neutral-700">
-<span className="opacity-60">Camera preview</span>
+<span className="opacity-60 font-buttonsfont">Camera Preview</span>
 </div>
 )}
 
@@ -147,7 +147,7 @@ className="rounded-xl w-full h-64 object-cover bg-black"
 {!cameraOn ? (
 <button
 onClick={startCamera}
-className="flex-1 py-2 rounded-xl bg-blue-600 text-white"
+className="flex-1 py-2 rounded-xl bg-blue-600 text-white font-buttonsfont"
 >
 Start Camera
 </button>
@@ -165,7 +165,7 @@ isReady ? "bg-green-600" : "bg-gray-400"
 
 <button
 onClick={handleSkip}
-className="flex-1 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700"
+className="flex-1 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 font-buttonsfont"
 >
 Skip
 </button>
