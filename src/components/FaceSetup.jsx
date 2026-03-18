@@ -16,7 +16,7 @@ const [error,setError] = useState("")
 /* START CAMERA */
 
 const startCamera = async () => {
-try{
+try {
 
 const stream = await navigator.mediaDevices.getUserMedia({
 video: { facingMode: "user" }
@@ -24,21 +24,26 @@ video: { facingMode: "user" }
 
 streamRef.current = stream
 
-if(videoRef.current){
-videoRef.current.srcObject = stream
+const video = videoRef.current
 
-/* wait for video to load */
-videoRef.current.onloadedmetadata = () => {
-videoRef.current.play()
+if(video){
+video.srcObject = stream
+
+video.onloadedmetadata = () => {
+video.play()
+
+/* wait a bit for mobile */
+setTimeout(() => {
+setIsReady(true)
+}, 500)
 }
 }
 
 setCameraOn(true)
-setError("")
 
-}catch(err){
+} catch (err) {
 console.error(err)
-setError("Camera access denied or not available")
+alert("Camera not working on this device")
 }
 }
 
@@ -51,11 +56,6 @@ const canvas = canvasRef.current
 
 if(!video || !canvas) return
 
-/* ensure video is ready */
-if(video.videoWidth === 0){
-alert("Camera not ready yet")
-return
-}
 
 canvas.width = video.videoWidth
 canvas.height = video.videoHeight
@@ -153,9 +153,12 @@ Start Camera
 ) : (
 <button
 onClick={capture}
-className="flex-1 py-2 rounded-xl bg-green-600 text-white"
+disabled={!isReady}
+className={`flex-1 py-2 rounded-xl text-white ${
+isReady ? "bg-green-600" : "bg-gray-400"
+}`}
 >
-Capture
+{isReady ? "Capture" : "Preparing camera..."}
 </button>
 )}
 
