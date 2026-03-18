@@ -4,51 +4,100 @@ import { useNavigate } from "react-router-dom"
 export default function FaceSetup(){
 
 const navigate = useNavigate()
+
 const videoRef = useRef(null)
 const canvasRef = useRef(null)
+const streamRef = useRef(null)
 
 const [image,setImage] = useState(null)
 const [cameraOn,setCameraOn] = useState(false)
+const [error,setError] = useState("")
 
 /* START CAMERA */
 
 const startCamera = async () => {
-const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+try{
+
+const stream = await navigator.mediaDevices.getUserMedia({
+video: { facingMode: "user" }
+})
+
+streamRef.current = stream
+
+if(videoRef.current){
 videoRef.current.srcObject = stream
+
+/* wait for video to load */
+videoRef.current.onloadedmetadata = () => {
+videoRef.current.play()
+}
+}
+
 setCameraOn(true)
+setError("")
+
+}catch(err){
+console.error(err)
+setError("Camera access denied or not available")
+}
 }
 
 /* CAPTURE FACE */
 
 const capture = () => {
-const canvas = canvasRef.current
+
 const video = videoRef.current
+const canvas = canvasRef.current
+
+if(!video || !canvas) return
+
+/* ensure video is ready */
+if(video.videoWidth === 0){
+alert("Camera not ready yet")
+return
+}
 
 canvas.width = video.videoWidth
 canvas.height = video.videoHeight
 
 const ctx = canvas.getContext("2d")
+
 ctx.drawImage(video,0,0)
 
 const data = canvas.toDataURL("image/png")
+
 setImage(data)
 
-/* stop camera */
-video.srcObject.getTracks().forEach(track => track.stop())
+/* STOP CAMERA CLEANLY */
+if(streamRef.current){
+streamRef.current.getTracks().forEach(track => track.stop())
+}
+
 setCameraOn(false)
 }
 
-/* SAVE (for now localStorage) */
+/* SAVE FACE */
 
 const handleSave = () => {
+
+if(!image){
+alert("Capture image first")
+return
+}
+
+/* save locally */
 localStorage.setItem("faceData", image)
-navigate("/feed")
+
+/* optional: debug */
+console.log("Face saved:", image.substring(0,50))
+
+navigate("/gallery") // FIXED ROUTE
 }
 
 /* SKIP */
 
 const handleSkip = () => {
-navigate("/feed")
+navigate("/gallery")
 }
 
 return(
@@ -64,7 +113,7 @@ Capture your face so we can automatically find photos you appear in.
 You can skip this and add it later.
 </p>
 
-{/* CAMERA / PREVIEW */}
+{/* CAMERA AREA */}
 
 <div className="w-full max-w-md">
 
@@ -73,11 +122,21 @@ You can skip this and add it later.
 <div className="space-y-4">
 
 {cameraOn ? (
-<video ref={videoRef} autoPlay className="rounded-xl w-full"/>
+<video
+ref={videoRef}
+autoPlay
+playsInline
+muted
+className="rounded-xl w-full h-64 object-cover bg-black"
+/>
 ) : (
 <div className="h-64 flex items-center justify-center border rounded-xl border-neutral-300 dark:border-neutral-700">
 <span className="opacity-60">Camera preview</span>
 </div>
+)}
+
+{error && (
+<p className="text-red-500 text-sm text-center">{error}</p>
 )}
 
 <canvas ref={canvasRef} className="hidden"/>
@@ -115,7 +174,10 @@ Skip
 
 <div className="space-y-4">
 
-<img src={image} className="rounded-xl"/>
+<img
+src={image}
+className="rounded-xl w-full h-64 object-cover"
+/>
 
 <div className="flex gap-3">
 
@@ -127,7 +189,10 @@ Save Face
 </button>
 
 <button
-onClick={()=>setImage(null)}
+onClick={()=>{
+setImage(null)
+startCamera()
+}}
 className="flex-1 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700"
 >
 Retake
@@ -137,7 +202,7 @@ Retake
 
 <button
 onClick={handleSkip}
-className="w-full py-2 rounded-xl text-sm text-gray-500"
+className="w-full py-2 text-sm text-gray-500"
 >
 Skip for now
 </button>

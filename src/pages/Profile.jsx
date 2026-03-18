@@ -23,7 +23,7 @@ const [newPhoto,setNewPhoto] = useState("")
 /* LOGOUT */
 
 const handleLogout = () => {
-window.localStorage.removeItem("pixelUser")
+localStorage.removeItem("pixelUser")
 window.dispatchEvent(new Event("storage"))
 navigate("/")
 }
@@ -39,8 +39,12 @@ const storedUser = localStorage.getItem("pixelUser")
 if(storedUser){
 const parsed = JSON.parse(storedUser)
 setUser(parsed)
-setNewName(parsed.name)
-setNewPhoto(parsed.picture)
+
+/* ❗ ONLY update edit fields if NOT editing */
+if(!editing){
+setNewName(parsed.name || "")
+setNewPhoto(parsed.picture || "")
+}
 }
 
 const saved = JSON.parse(localStorage.getItem("pixelSaved")) || []
@@ -61,7 +65,7 @@ loadData()
 window.addEventListener("storage",loadData)
 return ()=>window.removeEventListener("storage",loadData)
 
-},[])
+},[editing])
 
 /* IMAGE UPLOAD */
 
@@ -70,7 +74,6 @@ const handleImageUpload = (e) => {
 const file = e.target.files[0]
 if(!file) return
 
-/* only images */
 if(!file.type.startsWith("image/")){
 alert("Please upload an image file")
 return
@@ -106,7 +109,6 @@ size
 
 const cropped = canvas.toDataURL("image/png")
 
-/* IMPORTANT: force update */
 setNewPhoto(cropped)
 
 }
@@ -128,28 +130,30 @@ alert("Username cannot be empty")
 return
 }
 
-if(!newPhoto){
-alert("Profile image not loaded yet")
-return
-}
-
 const updatedUser = {
 ...user,
 name: newName,
-picture: newPhoto
+picture: newPhoto || user.picture
 }
 
 /* SAVE */
 localStorage.setItem("pixelUser", JSON.stringify(updatedUser))
 
-/* FORCE UPDATE EVERYWHERE */
+/* SYNC */
 window.dispatchEvent(new Event("storage"))
 window.dispatchEvent(new Event("userChanged"))
 
-/* UPDATE LOCAL STATE */
 setUser(updatedUser)
 setEditing(false)
 
+}
+
+/* CANCEL EDIT */
+
+const cancelEdit = () => {
+setNewName(user.name)
+setNewPhoto(user.picture)
+setEditing(false)
 }
 
 /* RING COLOR */
@@ -197,7 +201,7 @@ className="text-xs"
 
 <div className="text-center sm:text-left">
 
-{/* USERNAME + MODERN ICON */}
+{/* USERNAME + ICON */}
 
 <div className="flex items-center gap-3 justify-center sm:justify-start">
 
@@ -218,13 +222,7 @@ className="text-2xl sm:text-3xl font-headersfont px-3 py-1 rounded-lg border bor
 
 <button
 onClick={()=>setEditing(true)}
-className="
-flex items-center justify-center
-w-8 h-8
-rounded-full
-hover:bg-neutral-200 dark:hover:bg-neutral-800
-transition
-"
+className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-neutral-200 dark:hover:bg-neutral-800 transition"
 >
 <Pencil size={16} className="text-gray-500 hover:text-blue-600"/>
 </button>
@@ -253,7 +251,7 @@ Save
 </button>
 
 <button
-onClick={()=>setEditing(false)}
+onClick={cancelEdit}
 className="px-5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700"
 >
 Cancel
