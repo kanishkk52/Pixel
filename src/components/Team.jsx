@@ -8,7 +8,7 @@ const team = [
 name:"Kanishk",
 title:"Lead Photographer & Designer",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773939795/podcast_pic_xhqbag.png",
 bio:`Notice who isn’t in any of the photos? Yep — that’s me.
 While everyone else is busy posing, I’m the one behind the lens capturing the moment before it disappears.
 As Pixel’s lead photographer and designer, I turn everyday moments into visuals worth remembering.`
