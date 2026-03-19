@@ -106,28 +106,7 @@ transition
 
 </div>
 
-{/* ✅ FACE FILTER BUTTON */}
 
-<div className="flex justify-center mt-4 px-4">
-
-<button
-onClick={()=>navigate("/face-filter")}
-className="
-w-full max-w-md
-px-5 py-2
-rounded-full
-bg-white/40 dark:bg-white/10
-backdrop-blur-md
-border border-gray-300 dark:border-white/20
-text-sm
-shadow-sm
-hover:scale-105 transition
-"
->
-Find My Photos
-</button>
-
-</div>
 
 {/* EVENTS */}
 

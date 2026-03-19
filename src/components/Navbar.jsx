@@ -70,7 +70,7 @@ return(
 
 {/* LOGO */}
 
-<Link to="/" className="font-headersfont text-xl">
+<Link to="/" className="font-headersfont text-xl hover:text-blue-600">
 Pixel
 </Link>
 
