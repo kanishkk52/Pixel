@@ -418,12 +418,12 @@ placeholder="Add comment..."
 className="flex-1 text-sm border rounded-lg px-3 py-1
 bg-white text-black placeholder-gray-500
 dark:bg-neutral-900 dark:text-white dark:placeholder-gray-400
-border-neutral-300 dark:border-neutral-700"
+border-neutral-300 dark:border-neutral-700 font-buttonsfont"
 />
 
 <button
 onClick={()=>addComment(post.id)}
-className="text-sm px-3 py-1 border rounded-lg"
+className="text-sm px-3 py-1 border rounded-3xl"
 >
 Post
 </button>

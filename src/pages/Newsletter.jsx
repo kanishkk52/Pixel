@@ -50,7 +50,7 @@ className="w-full h-64 object-cover"
 <a
 href={n.pdf}
 target="_blank"
-className="inline-block px-5 py-2 rounded-lg font-buttonsfont bg-black text-white dark:bg-white dark:text-black"
+className="inline-block px-5 py-2 rounded-3xl font-buttonsfont bg-black text-white dark:bg-white dark:text-black"
 >
 
 Open Newsletter

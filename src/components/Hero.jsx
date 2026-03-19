@@ -98,12 +98,12 @@ Your <i>moments </i>, Organised <i>Beautifully!</i>
 
 <button
 onClick={() => navigate("/login")}
-className="px-8 py-4 font-buttonsfont bg-black text-white rounded-xl hover:scale-105 transition"
+className="px-8 py-4 font-buttonsfont bg-black text-white rounded-full hover:scale-105 transition dark:border-2"
 >
 Get Started
 </button>
 <a href="#team" className=" hover:scale-105 transition">  
-<button className="px-8 py-4 font-buttonsfont border rounded-xl hover:bg-blue-00 transition">
+<button className="px-8 py-4 font-buttonsfont bg-white text-black  rounded-full hover:bg-blue-00 transition border-2 border-black dark:border-2 dark:border-white">
 Learn More
 </button>
 </a>
