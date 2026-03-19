@@ -12,20 +12,24 @@ import FaceSetup from "./components/FaceSetup"
 import FaceFilter from "./components/FaceFilter"
 import UsernameSetup from "./pages/UsernameSetup"
 import Navbar from "./components/Navbar"
+import CustomCursor from "./components/CustomCursor"
 
 import ThemeToggle from "./components/ThemeToggle"
+
 function Layout(){
 
   const location = useLocation()
 
-  // hide navbar on login page
   const hideNavbar = location.pathname === "/login"
+  
 
   return (
     <>
-      {!hideNavbar && <Navbar />}
-         
-      <ThemeToggle/>
+  <CustomCursor />   {/* ✅ ADD THIS LINE */}
+
+  {!hideNavbar && <Navbar />}
+  <ThemeToggle/>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -37,23 +41,17 @@ function Layout(){
         <Route path="/face-setup" element={<FaceSetup/>} />
         <Route path="/face-filter" element={<FaceFilter/>} />
         <Route path="/username" element={<UsernameSetup />} />
-        
-
-
       </Routes>
     </>
   )
 }
 
 function App() {
-
   return (
     <Router>
       <Layout />
     </Router>
   )
-
 }
 
 export default App
-//TESTING

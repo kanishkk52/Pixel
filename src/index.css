@@ -103,3 +103,21 @@ animation: slideIn 0.25s ease;
 body{
 overflow-x:hidden;
 }
+
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+button, a, img {
+  cursor: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  cursor: none;
+}
