@@ -7,8 +7,16 @@ export default function Login(){
 
 const navigate = useNavigate()
 
-// allowed email domains
+/* ✅ allowed domains */
 const allowedDomains = ["sait.ac.in","saip.ac.in"]
+
+/* ✅ multiple admin emails */
+const adminEmails = [
+  "kanishkk52@gmail.com",
+  "altatrescue@gmail.com",
+  "yashadlakpc@gmail.com",
+  "biku.patel45@gmail.com"
+]
 
 const handleLoginSuccess = (credentialResponse)=>{
 
@@ -17,27 +25,40 @@ const decoded = jwtDecode(credentialResponse.credential)
 const email = decoded.email
 const domain = email.split("@")[1]
 
-if(allowedDomains.includes(domain)){
+let ring = ""
 
-console.log("Allowed user:", email)
+/* ✅ ADMIN CHECK (FIXED) */
+if(adminEmails.includes(email)){
+  ring = "rainbow"
 
-// save user so Navbar + Profile can access it
+/* ✅ DOMAIN USERS */
+}else if(allowedDomains.includes(domain)){
+
+  if(domain === "sait.ac.in"){
+    ring = "#b55f22"
+  }
+
+  if(domain === "saip.ac.in"){
+    ring = "blue-600"
+  }
+
+}else{
+  alert("Only approved emails can login")
+  return
+}
+
+/* ✅ SAVE USER */
 const user = {
-name: decoded.name,
-email: decoded.email,
-picture: decoded.picture,
-domain: "sait.ac.in"
+  name: decoded.name,
+  email: decoded.email,
+  picture: decoded.picture,
+  domain,
+  ring
 }
 
 localStorage.setItem("pixelUser", JSON.stringify(user))
 
 navigate("/username")
-
-}else{
-
-alert("Only approved college domains can login")
-
-}
 
 }
 
@@ -45,10 +66,7 @@ return(
 
 <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-black">
 
-{/* PARTICLES */}
 <TeamParticles/>
-
-{/* LOGIN CARD */}
 
 <div className="relative z-10
 backdrop-blur-2xl
@@ -69,8 +87,6 @@ Your <i>moments</i>, organised <i>beautifully!</i>
 
 <div className="flex flex-col gap-4 w-[260px]">
 
-{/* GOOGLE LOGIN */}
-
 <div className="flex justify-center">
 <GoogleLogin
 onSuccess={handleLoginSuccess}
@@ -78,15 +94,11 @@ onError={()=>console.log("Login Failed")}
 />
 </div>
 
-{/* GUEST */}
-
 <button
 onClick={()=>navigate("/feed")}
 className="text-gray-600 dark:text-gray-400 w-full py-3 rounded-xl hover:bg-white/10 transition"
 >
-
 Browse as Guest
-
 </button>
 
 </div>

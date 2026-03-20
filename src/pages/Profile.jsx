@@ -267,7 +267,7 @@ className="px-5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-70
 Logout
 </button>
 
-{user?.email === "kanishk.kukreja2023@sait.ac.in" && (
+{user?.email === "kanishkk52@gmail.com" && (
 <button
 onClick={()=>navigate("/manage")}
 className="px-5 py-2 rounded-xl bg-blue-600 text-white"
