@@ -5,71 +5,31 @@ export default function Feed(){
 
 const user = JSON.parse(localStorage.getItem("pixelUser"))
 
-const defaultPosts = [
-{
-id:1,
-title:"Photography Club Meetup",
-text:"Amazing moments from today's meetup.",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512354/photo6_p5lng5.jpg",
-liked:false,
-saved:false,
-hearts:[],
-showComments:false,
-commentInput:"",
-comments:[
-{ id:1, user:"Aarav", text:"Great event!", replies:[] },
-{ id:2, user:"Riya", text:"Wish I was there!", replies:[] }
-]
-},
-{
-id:2,
-title:"Photography Club Meetup",
-text:"Amazing moments from today's meetup.",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512346/photo10_m1fzw9.jpg",
-liked:false,
-saved:false,
-hearts:[],
-showComments:false,
-commentInput:"",
-comments:[]
-},
-{
-id:3,
-title:"Photography Club Meetup",
-text:"Amazing moments from today's meetup.",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg",
-liked:false,
-saved:false,
-hearts:[],
-showComments:false,
-commentInput:"",
-comments:[]
-}
-]
-
 const [posts,setPosts] = useState([])
 
-/* LOAD POSTS */
+/* ✅ LOAD POSTS (ONLY FROM STORAGE) */
 
 useEffect(()=>{
 
-const stored = JSON.parse(localStorage.getItem("pixelPosts"))
+const loadPosts = () => {
 
-if(stored){
+const stored = JSON.parse(localStorage.getItem("pixelPosts")) || []
 
-const cleaned = stored.map(p=>({
+const cleaned = stored.map(p => ({
 ...p,
-hearts:[]
+hearts: p.hearts || [],
+showComments: p.showComments || false,
+commentInput: p.commentInput || "",
+comments: p.comments || []
 }))
 
 setPosts(cleaned)
-
-}else{
-
-setPosts(defaultPosts)
-localStorage.setItem("pixelPosts", JSON.stringify(defaultPosts))
-
 }
+
+loadPosts()
+
+window.addEventListener("storage", loadPosts)
+return () => window.removeEventListener("storage", loadPosts)
 
 },[])
 
@@ -77,21 +37,17 @@ localStorage.setItem("pixelPosts", JSON.stringify(defaultPosts))
 
 const updatePosts = (newPosts) => {
 
-const cleaned = newPosts.map(p=>({
-...p,
-hearts:[]
-}))
+setPosts(newPosts)
 
-setPosts(cleaned)
+localStorage.setItem("pixelPosts", JSON.stringify(newPosts))
 
-localStorage.setItem("pixelPosts", JSON.stringify(cleaned))
-
-const saved = cleaned.filter(p => p.saved)
+const saved = newPosts.filter(p => p.saved)
 localStorage.setItem("pixelSaved", JSON.stringify(saved))
 
+window.dispatchEvent(new Event("storage"))
 }
 
-/* SAVE POST */
+/* SAVE */
 
 const handleSave = (post) => {
 
@@ -100,13 +56,11 @@ alert("Please login to save posts")
 return
 }
 
-const updated = posts.map(p=>{
-if(p.id !== post.id) return p
-return {...p, saved: !p.saved}
-})
+const updated = posts.map(p =>
+p.id === post.id ? {...p, saved: !p.saved} : p
+)
 
 updatePosts(updated)
-
 }
 
 /* LIKE */
@@ -145,10 +99,9 @@ return {...post, liked:false}
 })
 
 updatePosts(updated)
-
 }
 
-/* TOGGLE COMMENTS */
+/* COMMENTS */
 
 const toggleComments = (postId) => {
 
@@ -157,40 +110,33 @@ alert("Please login to comment")
 return
 }
 
-const updated = posts.map(post =>
+updatePosts(
+posts.map(post =>
 post.id === postId
 ? {...post, showComments: !post.showComments}
 : post
 )
-
-updatePosts(updated)
-
+)
 }
-
-/* COMMENT INPUT */
 
 const updateCommentInput = (postId,value) => {
 
-const updated = posts.map(post =>
+updatePosts(
+posts.map(post =>
 post.id === postId
 ? {...post, commentInput:value}
 : post
 )
-
-updatePosts(updated)
-
+)
 }
-
-/* ADD COMMENT */
 
 const addComment = (postId) => {
 
 const post = posts.find(p=>p.id === postId)
-
 if(!post.commentInput.trim()) return
 
-const updated = posts.map(p=>{
-
+updatePosts(
+posts.map(p=>{
 if(p.id !== postId) return p
 
 return {
@@ -206,27 +152,20 @@ replies:[]
 }
 ]
 }
-
 })
-
-updatePosts(updated)
-
+)
 }
-
-/* ADD REPLY */
 
 const addReply = (postId,commentId,text) => {
 
-const updated = posts.map(post=>{
-
+updatePosts(
+posts.map(post=>{
 if(post.id !== postId) return post
 
 return{
 ...post,
 comments: post.comments.map(comment=>{
-
 if(comment.id !== commentId) return comment
-
 return{
 ...comment,
 replies:[
@@ -238,33 +177,23 @@ text
 }
 ]
 }
-
 })
 }
-
 })
-
-updatePosts(updated)
-
+)
 }
-
-/* DELETE COMMENT */
 
 const deleteComment = (postId, commentId) => {
 
-const updated = posts.map(post => {
-
+updatePosts(
+posts.map(post=>{
 if(post.id !== postId) return post
-
 return {
 ...post,
-comments: post.comments.filter(comment => comment.id !== commentId)
+comments: post.comments.filter(c => c.id !== commentId)
 }
-
 })
-
-updatePosts(updated)
-
+)
 }
 
 return(
@@ -277,7 +206,17 @@ Event Feed
 
 <div className="max-w-4xl mx-auto mt-16 space-y-16 px-4">
 
-{posts.map(post=>(
+{/* ✅ EMPTY STATE */}
+
+{posts.length === 0 ? (
+
+<p className="text-center text-gray-500 mt-20">
+No posts yet. Upload from Manage Data 📸
+</p>
+
+) : (
+
+posts.map(post=>(
 
 <div key={post.id} className="flex flex-col md:flex-row gap-6 items-start">
 
@@ -301,30 +240,14 @@ Event Feed
 
 <div className="flex gap-4">
 
-<div className="relative">
-
 <button
 onClick={()=>handleLike(post.id)}
-className={`w-9 h-9 flex items-center justify-center rounded-full transition hover:scale-110
+className={`w-9 h-9 flex items-center justify-center rounded-full
 ${post.liked ? "text-blue-600" : ""}
 `}
 >
-
 <Heart size={20} fill={post.liked ? "currentColor" : "none"} />
-
 </button>
-
-{post.hearts.map(h=>(
-<span
-key={h.id}
-className="absolute left-1/2 top-1/2 text-blue-600 animate-floatHeart"
-style={{transform:`translate(-50%,-50%) translateX(${h.left}px)`}}
->
-<Heart size={12} fill="currentColor"/>
-</span>
-))}
-
-</div>
 
 <button
 onClick={()=>toggleComments(post.id)}
@@ -382,14 +305,12 @@ Reply
 </button>
 
 {user && comment.user === user.name && (
-
 <button
 onClick={()=>deleteComment(post.id,comment.id)}
 className="text-red-500"
 >
 Delete
 </button>
-
 )}
 
 </div>
@@ -416,9 +337,8 @@ value={post.commentInput}
 onChange={(e)=>updateCommentInput(post.id,e.target.value)}
 placeholder="Add comment..."
 className="flex-1 text-sm border rounded-lg px-3 py-1
-bg-white text-black placeholder-gray-500
-dark:bg-neutral-900 dark:text-white dark:placeholder-gray-400
-border-neutral-300 dark:border-neutral-700 font-buttonsfont"
+bg-white text-black dark:bg-neutral-900 dark:text-white
+border-neutral-300 dark:border-neutral-700"
 />
 
 <button
@@ -436,7 +356,9 @@ Post
 
 </div>
 
-))}
+))
+
+)}
 
 </div>
 

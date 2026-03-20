@@ -13,6 +13,9 @@ import FaceFilter from "./components/FaceFilter"
 import UsernameSetup from "./pages/UsernameSetup"
 import Navbar from "./components/Navbar"
 import CustomCursor from "./components/CustomCursor"
+import Admin from "./pages/Admin"
+import ManageData from "./components/ManageData"
+
 
 import ThemeToggle from "./components/ThemeToggle"
 
@@ -41,6 +44,10 @@ function Layout(){
         <Route path="/face-setup" element={<FaceSetup/>} />
         <Route path="/face-filter" element={<FaceFilter/>} />
         <Route path="/username" element={<UsernameSetup />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/manage" element={<ManageData />} />
+
+
       </Routes>
     </>
   )

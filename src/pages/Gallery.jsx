@@ -5,40 +5,32 @@ export default function Gallery(){
 
 const navigate = useNavigate()
 
-/* EVENTS */
+/* ✅ LOAD FOLDERS FROM LOCAL STORAGE */
 
-const events = [
-{
-id:1,
-name:"Photography Club Meetup",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512354/photo6_p5lng5.jpg"
-},
-{
-id:2,
-name:"Campus Nature Walk",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512346/photo10_m1fzw9.jpg"
-},
-{
-id:3,
-name:"Hackathon Night",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg"
-},
-{
-id:4,
-name:"Cultural Fest",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512354/photo6_p5lng5.jpg"
-},
-{
-id:5,
-name:"Sports Day",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512346/photo10_m1fzw9.jpg"
-},
-{
-id:6,
-name:"Workshop Series",
-cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg"
+const [events,setEvents] = useState([])
+
+useEffect(()=>{
+
+const loadFolders = () => {
+
+const stored = JSON.parse(localStorage.getItem("eventImages")) || {}
+
+/* convert object → array */
+const folders = Object.keys(stored).map((key,index)=>({
+id: key, // ✅ IMPORTANT (string id now)
+name: key,
+cover: stored[key][0] || "https://via.placeholder.com/400x300?text=No+Image"
+}))
+
+setEvents(folders)
 }
-]
+
+loadFolders()
+
+window.addEventListener("storage", loadFolders)
+return ()=>window.removeEventListener("storage", loadFolders)
+
+},[])
 
 /* SEARCH */
 
@@ -80,7 +72,7 @@ return(
 Event Gallery
 </h1>
 
-{/* ✅ SEARCH BAR */}
+{/* SEARCH */}
 
 <div className="flex justify-center mt-6 px-4">
 
@@ -106,16 +98,20 @@ transition
 
 </div>
 
-
-
 {/* EVENTS */}
 
 <div className="max-w-6xl mx-auto px-5 sm:px-6 md:px-8 mt-16 space-y-24">
 
-{filteredEvents.length === 0 ? (
+{events.length === 0 ? (
 
 <p className="text-center text-gray-500">
-No events found.
+No folders yet. Create one in Manage Data 📁
+</p>
+
+) : filteredEvents.length === 0 ? (
+
+<p className="text-center text-gray-500">
+No matching folders.
 </p>
 
 ) : (
@@ -152,8 +148,9 @@ className="w-full h-56 sm:h-64 object-cover group-hover:scale-110 transition"
 
 </div>
 
-{/* ✅ DESKTOP ONLY NAVIGATOR */}
+{/* NAVIGATOR */}
 
+{events.length > 0 && (
 <div className="hidden md:flex fixed right-5 top-1/2 -translate-y-1/2 flex-col gap-3 z-50">
 
 {filteredEvents.map((event,index)=>(
@@ -178,6 +175,7 @@ group-hover:opacity-100 transition"
 ))}
 
 </div>
+)}
 
 </div>
 

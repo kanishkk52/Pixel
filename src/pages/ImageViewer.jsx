@@ -61,35 +61,58 @@ let savedPosts = JSON.parse(localStorage.getItem("pixelSaved")) || []
 const existing = savedPosts.find(p => p.image === image)
 
 if(existing){
-
 savedPosts = savedPosts.filter(p => p.image !== image)
 setSaved(false)
-
 }else{
-
 savedPosts.push({
 id: Date.now(),
 type: "image",
 image: image
 })
-
 setSaved(true)
-
 }
 
 localStorage.setItem("pixelSaved", JSON.stringify(savedPosts))
-
 }
 
-/* DOWNLOAD */
+/* ✅ FIXED DOWNLOAD (CLOUDINARY + LOCAL) */
 
-const downloadLink = image.replace("/upload/","/upload/fl_attachment/")
+const handleDownload = () => {
+
+/* Cloudinary */
+if(image.includes("res.cloudinary.com")){
+const link = document.createElement("a")
+link.href = image.replace("/upload/","/upload/fl_attachment/")
+link.download = "photo.jpg"
+link.click()
+return
+}
+
+/* Local (base64) */
+fetch(image)
+.then(res => res.blob())
+.then(blob => {
+
+const url = window.URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "photo.png"
+document.body.appendChild(a)
+a.click()
+a.remove()
+
+window.URL.revokeObjectURL(url)
+
+})
+
+}
 
 return(
 
 <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
 
-{/* IMAGE + ISLAND GROUP */}
+{/* IMAGE + ACTIONS */}
 
 <div className="relative group flex flex-col items-center">
 
@@ -100,17 +123,17 @@ src={image}
 className="max-h-[85vh] max-w-[90vw] rounded-xl"
 />
 
-{/* MOBILE ACTION BAR */}
+{/* 📱 MOBILE ACTION BAR */}
 
 <div className="flex md:hidden justify-center gap-6 mt-5">
 
-<a
-href={downloadLink}
+<button
+onClick={handleDownload}
 className="flex items-center gap-2 px-6 py-3 bg-black text-white rounded-lg"
 >
 <Download size={18}/>
 <span>Download</span>
-</a>
+</button>
 
 <button
 onClick={toggleSave}
@@ -124,7 +147,7 @@ saved ? "bg-blue-600 text-white" : "bg-black text-white"
 
 </div>
 
-{/* DYNAMIC ISLAND (DESKTOP ONLY) */}
+{/* 💻 DYNAMIC ISLAND */}
 
 <div
 className="
@@ -135,19 +158,19 @@ bg-black text-white
 rounded-full
 overflow-hidden
 transition-all duration-300
-md:w-2 md:opacity-0 md:group-hover:w-36 md:group-hover:opacity-100
-h-9
+md:w-2 md:opacity-0 md:group-hover:w-40 md:group-hover:opacity-100
+h-10
 "
 >
 
 <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition">
 
-<a
-href={downloadLink}
+<button
+onClick={handleDownload}
 className="hover:text-blue-600 transition"
 >
 <Download size={20}/>
-</a>
+</button>
 
 <span className="text-gray-500">|</span>
 

@@ -1,34 +1,56 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ImageViewer from "./ImageViewer"
 
 export default function EventGallery(){
 
 const user = JSON.parse(localStorage.getItem("pixelUser"))
 const navigate = useNavigate()
-
 const { id } = useParams()
 
-const events = {
+/* DEFAULT IMAGES */
 
+const defaultEvents = {
 1:[
 "https://res.cloudinary.com/dwk329jcv/image/upload/v1773512354/photo6_p5lng5.jpg",
 "https://res.cloudinary.com/dwk329jcv/image/upload/v1773512346/photo10_m1fzw9.jpg",
 "https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg"
 ],
-
 2:[
 "https://res.cloudinary.com/dwk329jcv/image/upload/v1773512346/photo10_m1fzw9.jpg",
 "https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo5_cdywlo.jpg"
 ]
-
 }
 
-const images = events[id] || []
+/* ✅ STATE (IMPORTANT FIX) */
 
+const [images,setImages] = useState([])
 const [viewer,setViewer] = useState(null)
 
-/* ✅ FIND MY PHOTOS */
+/* ✅ LOAD + LISTEN */
+
+useEffect(() => {
+
+const loadImages = () => {
+
+const stored = JSON.parse(localStorage.getItem("eventImages")) || {}
+
+const merged = [
+...(stored[id] || []),
+...(defaultEvents[id] || [])
+]
+
+setImages(merged)
+}
+
+loadImages()
+
+window.addEventListener("storage", loadImages)
+return () => window.removeEventListener("storage", loadImages)
+
+}, [id])
+
+/* FIND MY PHOTOS */
 
 const handleFindMyPhotos = () => {
 
@@ -45,9 +67,7 @@ navigate("/face-setup")
 return
 }
 
-/* pass event id */
 navigate(`/face-filter/${id}`)
-
 }
 
 return(
@@ -61,8 +81,6 @@ return(
 <h1 className="text-2xl font-headersfont">
 Event Photos
 </h1>
-
-{/* ✅ FIND MY PHOTOS BUTTON */}
 
 {user && (
 <button
@@ -79,9 +97,15 @@ Find My Photos
 
 <div className="max-w-6xl mx-auto px-6 mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-{images.map((img,i)=>(
+{images.length === 0 ? (
+<p className="text-gray-500 col-span-full text-center">
+No images uploaded yet.
+</p>
+) : (
 
-<div key={i} className="relative group">
+images.map((img,i)=>(
+
+<div key={i} className="relative group cursor-pointer">
 
 <img
 src={img}
@@ -95,24 +119,51 @@ ${!user ? "blur-sm brightness-75" : ""}
 
 {!user && (
 <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg">
-<p className="text-white text-sm font-buttonsfont">Login to View</p>
+<p className="text-white text-sm font-buttonsfont">
+Login to View
+</p>
 </div>
 )}
 
 {/* DOWNLOAD */}
 
 {user && (
-<a
-href={img.replace("/upload/","/upload/fl_attachment/")}
-className="absolute top-2 right-2 bg-black/60 text-white text-xs px-3 py-1 rounded-3xl opacity-0 group-hover:opacity-100 transition font-buttonsfont"
+<button
+onClick={()=>{
+fetch(img)
+.then(res => res.blob())
+.then(blob => {
+
+const url = window.URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "photo.png"
+document.body.appendChild(a)
+a.click()
+a.remove()
+
+window.URL.revokeObjectURL(url)
+
+})
+}}
+className="
+absolute top-2 right-2
+bg-black/70 text-white text-xs px-3 py-1
+rounded-3xl
+opacity-100 md:opacity-0 md:group-hover:opacity-100
+transition
+"
 >
 Download
-</a>
+</button>
 )}
 
 </div>
 
-))}
+))
+
+)}
 
 </div>
 
