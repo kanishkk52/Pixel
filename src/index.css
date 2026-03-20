@@ -121,3 +121,9 @@ html {
 body {
   cursor: none;
 }
+
+@media (pointer: coarse) {
+  * {
+    cursor: default !important;
+  }
+}
