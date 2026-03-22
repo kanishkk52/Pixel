@@ -20,7 +20,7 @@ return(
 
 <section id = "filmroll" className="film-section">
 
-<h2 className="film-title font-headersfont" >Captured Moments</h2>
+<h2 className="text-4xl font-headersfont text-center mb-24">Captured Moments</h2>
 
 <div className="film-wrapper">
 
