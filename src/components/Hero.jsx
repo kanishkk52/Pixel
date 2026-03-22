@@ -78,12 +78,17 @@ Introducing
 
 <br/>
 
-<span className="text-4xl sm:text-5xl md:text-6xl 
-text-blue-600 font-pixel text-center px-6 
-drop-shadow-[0_0_25px_rgba(99,102,241,0.6)]">
-
+<span className="
+text-7xl        /* 🔥 bigger on phones */
+sm:text-5xl 
+md:text-6xl 
+lg:text-7xl
+text-blue-600 
+font-pixel 
+text-center px-6
+drop-shadow-[0_0_25px_rgba(99,102,241,0.6)]
+">
 Pixel
-
 </span>
 
 
