@@ -2,14 +2,14 @@ const newsletters = [
 
 {
 title:"Pixel Newsletter — January",
-cover:"public/newsletter/delve_cover.png",
-pdf:"public/newsletter/Delve_1.pdf"
+cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774172266/delve_cover_pgw4iz.png",
+pdf:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774172320/Delve_1_compressed_vnc6nx.pdf"
 },
 
 {
 title:"Pixel Newsletter — February",
-cover:"/newsletter/feb-cover.jpg",
-pdf:"/newsletter/february.pdf"
+cover:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774172266/delve_cover_pgw4iz.png",
+pdf:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774172320/Delve_1_compressed_vnc6nx.pdf"
 }
 
 ]
