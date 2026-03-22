@@ -1,12 +1,72 @@
-export default function Footer() {
+import { useState } from "react"
 
-  return (
-    <footer className="py-10 text-center border-t">
+export default function Footer(){
 
-      <p className="text-gray-500">
-        © 2026 Pixel — All rights reserved
-      </p>
+const [hover,setHover] = useState(false)
 
-    </footer>
-  );
+return(
+
+<footer className="
+w-full 
+bg-white dark:bg-black 
+text-black dark:text-white 
+pt-40 pb-16 mt-32 
+relative overflow-hidden
+">
+
+{/* 🔥 BIG CENTER LOGO (HALF HIDDEN) */}
+
+<div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2">
+
+{/* 👇 ONLY THIS WRAPS THE IMAGE (small hover area) */}
+<div
+onMouseEnter={()=>setHover(true)}
+onMouseLeave={()=>setHover(false)}
+className="inline-block transition-transform duration-[3000ms]"
+style={{
+transform: hover ? "rotate(360deg)" : "rotate(0deg)"
+}}
+>
+
+<img
+src="/photos/ulogopixel.svg"
+alt="logo"
+className="
+w-[900px] 
+md:w-[1100px] 
+lg:w-[1400px]   /* 🔥 BIG like your reference */
+object-contain
+"
+/>
+
+</div>
+
+</div>
+
+{/* FOOTER CONTENT */}
+
+<div className="
+relative z-10 
+max-w-6xl mx-auto px-6 
+flex flex-col md:flex-row 
+justify-between items-center 
+text-sm 
+text-gray-500 dark:text-gray-400 
+gap-4
+">
+
+<p>© {new Date().getFullYear()} Pixel. All rights reserved.</p>
+
+<div className="flex gap-6">
+<span className="hover:text-black dark:hover:text-white cursor-pointer">Privacy</span>
+<span className="hover:text-black dark:hover:text-white cursor-pointer">Terms</span>
+<span className="hover:text-black dark:hover:text-white cursor-pointer">Contact</span>
+</div>
+
+</div>
+
+</footer>
+
+)
+
 }
