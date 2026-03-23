@@ -112,7 +112,7 @@ hover:scale-105 transition
 /* LOGIN BUTTON */
 <button
 onClick={()=>navigate("/login")}
-className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm md:text-base hover:scale-105 transition"
+className="px-3 py-1 border-2 border-blue-600 text-black dark:text-white rounded-full text-sm md:text-base hover:bg-blue-600 hover:text-white"
 >
 Login
 </button>
