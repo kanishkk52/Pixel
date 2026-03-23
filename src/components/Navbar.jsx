@@ -22,10 +22,8 @@ setUser(null)
 
 }
 
-/* run immediately */
 loadUser()
 
-/* listen for changes */
 window.addEventListener("storage", loadUser)
 window.addEventListener("userChanged", loadUser)
 
@@ -54,6 +52,10 @@ navigate("/")
 const getRingColor = () => {
 
 if(!user) return ""
+
+if(user.ring === "rainbow"){
+return "ring-2 ring-transparent bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 p-[2px] rounded-full"
+}
 
 if(user.domain === "sait.ac.in") return "ring-[#b55f22]"
 if(user.domain === "saip.ac.in") return "ring-blue-600"
@@ -94,16 +96,34 @@ Gallery
 Newsletter
 </Link>
 
-{/* PROFILE */}
+{/* ✅ LOGIN / PROFILE SWITCH */}
 
-{user && (
+{user ? (
 
+/* PROFILE */
 <img
 src={user.picture}
 alt="profile"
 onClick={()=>navigate("/profile")}
-className={`w-8 h-8 md:w-9 md:h-9 rounded-full cursor-pointer object-cover ring-2 ring-offset-1 md:ring-offset-2 ring-offset-white dark:ring-offset-black ${getRingColor()} hover:scale-105 transition`}
+className={`
+w-8 h-8 md:w-9 md:h-9 
+rounded-full cursor-pointer object-cover 
+ring-2 ring-offset-1 md:ring-offset-2 
+ring-offset-white dark:ring-offset-black 
+${getRingColor()} 
+hover:scale-105 transition
+`}
 />
+
+) : (
+
+/* LOGIN BUTTON */
+<button
+onClick={()=>navigate("/login")}
+className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm md:text-base hover:scale-105 transition"
+>
+Login
+</button>
 
 )}
 
