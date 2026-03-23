@@ -50,18 +50,10 @@ navigate("/")
 /* RING COLOR */
 
 const getRingColor = () => {
-
 if(!user) return ""
-
-if(user.ring === "rainbow"){
-return "ring-2 ring-transparent bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 p-[2px] rounded-full"
-}
-
 if(user.domain === "sait.ac.in") return "ring-[#b55f22]"
 if(user.domain === "saip.ac.in") return "ring-blue-600"
-
 return "ring-neutral-400"
-
 }
 
 return(
