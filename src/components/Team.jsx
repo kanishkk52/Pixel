@@ -5,7 +5,7 @@ import TeamParticles from "./TeamParticles"
 const team = [
 
 {
-name:"Kanishk",
+name:"Kanishk Kukreja",
 title:"Lead Photographer & Designer",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773939795/podcast_pic_xhqbag.png",
@@ -15,35 +15,43 @@ As Pixel’s lead photographer and designer, I turn everyday moments into visual
 },
 
 {
-name:"Member Two",
-title:"Creative Director",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
-bio:`The one making sure every project has a visual story. From concept to final frame, they guide the creative direction of Pixel.`
+name:"Aniket Ambadkar",
+title:"<Title>",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08641_stomxz.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08794_mlo3yh.jpg",
+bio:`Writer of Prostitution - Ghop Ghop`
 },
 
 {
-name:"Member Three",
-title:"Visual Editor",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
-bio:`Turning raw shots into polished visuals. Color grading, retouching, and consistency — the magic that happens after the shutter clicks.`
+name:"Madhav Maurya",
+title:"<Title>",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450187/DSC08642_ofvhhe.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450195/DSC08791_lcgyvv.jpg",
+bio:`kala hu par dilwala hu isliye dil choote rehte hain mera`
 },
 
 {
-name:"Member Four",
-title:"Social Media Strategist",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
+name:"Jatin Adlak",
+title:"<Title>",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449941/DSC08521_2_bdpmwj.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
-bio:`Making sure our visuals reach the right audience at the right time.`
+bio:`ek or photo dhundni padegi iski`
 },
 
 {
-name:"Member Five",
-title:"Content Curator",
-image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512862/Me_CameraPic2_npr7ij.jpg",
-hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
-bio:`Selecting the moments that matter. From hundreds of frames to the final highlight reel.`
+name:"Ansh Jain",
+title:"<Title>",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449894/DSC08537_pz1oe8.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449907/DSC08639_e7gc31.jpg",
+bio:'Img1 - eh?? | Img2 - hihihi 😁'
+},
+
+{
+name:"Brajesh Patel",
+title:"<Title>",
+image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450065/DSC_0934_2_zi4wtr.jpg",
+hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450098/IMG_5196_2_zeglb5.jpg",
+bio:`Event ? wo to hota rahega - tum khane pe focus karo 😋`
 }
 
 ]
