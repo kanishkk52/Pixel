@@ -19,7 +19,7 @@ name:"Aniket Ambadkar",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08641_stomxz.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08794_mlo3yh.jpg",
-bio:`Writer of Prostitution - Ghop Ghop`
+bio:`Writer of Constitution`
 },
 
 {
