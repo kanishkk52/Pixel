@@ -22,23 +22,25 @@ relative overflow-hidden
 <div
 onMouseEnter={()=>setHover(true)}
 onMouseLeave={()=>setHover(false)}
-className="transition-all duration-[3000ms] ease-in-out"
+className="inline-block transition-all duration-[3000ms] ease-in-out"
 style={{
 transform: hover ? "rotate(360deg)" : "rotate(0deg)",
-opacity: hover ? 1 : 0.2   // ✅ THIS IS THE KEY
+opacity: hover ? 1 : 0.2
 }}
 >
 
 <img
 src="/photos/ulogopixel.svg"
 alt="logo"
-className="w-[800px] md:w-[1000px] lg:w-[1200px] object-contain pointer-events-none"
+className="
+block
+w-[900px] md:w-[1100px] lg:w-[1300px]
+object-contain
+"
 />
 
 </div>
-
 </div>
-
 {/* FOOTER CONTENT */}
 
 <div className="
