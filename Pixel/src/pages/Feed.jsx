@@ -8,6 +8,7 @@ const user = JSON.parse(localStorage.getItem("pixelUser"))
 
 const [posts,setPosts] = useState([])
 
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 /* 🔥 LOAD POSTS FROM BACKEND */
 
 useEffect(()=>{
@@ -36,13 +37,50 @@ setPosts(formatted)
 console.error("Error fetching posts:", err)
 setPosts([])
 })
+=======
+/* ✅ LOAD POSTS (ONLY FROM STORAGE) */
+
+useEffect(()=>{
+
+const loadPosts = () => {
+
+const stored = JSON.parse(localStorage.getItem("pixelPosts")) || []
+
+const cleaned = stored.map(p => ({
+...p,
+hearts: p.hearts || [],
+showComments: p.showComments || false,
+commentInput: p.commentInput || "",
+comments: p.comments || []
+}))
+
+setPosts(cleaned)
+}
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
+
+loadPosts()
+
+window.addEventListener("storage", loadPosts)
+return () => window.removeEventListener("storage", loadPosts)
 
 },[])
 
 /* UPDATE POSTS */
 
 const updatePosts = (newPosts) => {
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 setPosts(newPosts)
+=======
+
+setPosts(newPosts)
+
+localStorage.setItem("pixelPosts", JSON.stringify(newPosts))
+
+const saved = newPosts.filter(p => p.saved)
+localStorage.setItem("pixelSaved", JSON.stringify(saved))
+
+window.dispatchEvent(new Event("storage"))
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 }
 
 /* SAVE */
@@ -55,7 +93,11 @@ return
 }
 
 const updated = posts.map(p =>
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 p._id === post._id ? {...p, saved: !p.saved} : p
+=======
+p.id === post.id ? {...p, saved: !p.saved} : p
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 )
 
 updatePosts(updated)
@@ -110,7 +152,11 @@ return
 
 updatePosts(
 posts.map(post =>
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 post._id === postId
+=======
+post.id === postId
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 ? {...post, showComments: !post.showComments}
 : post
 )
@@ -121,7 +167,11 @@ const updateCommentInput = (postId,value) => {
 
 updatePosts(
 posts.map(post =>
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 post._id === postId
+=======
+post.id === postId
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 ? {...post, commentInput:value}
 : post
 )
@@ -130,12 +180,20 @@ post._id === postId
 
 const addComment = (postId) => {
 
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 const post = posts.find(p=>p._id === postId)
+=======
+const post = posts.find(p=>p.id === postId)
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 if(!post.commentInput.trim()) return
 
 updatePosts(
 posts.map(p=>{
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 if(p._id !== postId) return p
+=======
+if(p.id !== postId) return p
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 
 return {
 ...p,
@@ -158,7 +216,11 @@ const addReply = (postId,commentId,text) => {
 
 updatePosts(
 posts.map(post=>{
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 if(post._id !== postId) return post
+=======
+if(post.id !== postId) return post
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 
 return{
 ...post,
@@ -185,7 +247,11 @@ const deleteComment = (postId, commentId) => {
 
 updatePosts(
 posts.map(post=>{
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 if(post._id !== postId) return post
+=======
+if(post.id !== postId) return post
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 return {
 ...post,
 comments: post.comments.filter(c => c.id !== commentId)
@@ -204,7 +270,21 @@ Event Feed
 
 <div className="max-w-4xl mx-auto mt-16 space-y-16 px-4">
 
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 {/* EMPTY STATE */}
+=======
+{/* ✅ EMPTY STATE */}
+
+{posts.length === 0 ? (
+
+<p className="text-center text-gray-500 mt-20">
+No posts yet. Upload from Manage Data 📸
+</p>
+
+) : (
+
+posts.map(post=>(
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 
 {posts.length === 0 ? (
 
@@ -252,7 +332,11 @@ No Image
 <div className="flex gap-4">
 
 <button
+<<<<<<< HEAD:Pixel/src/pages/Feed.jsx
 onClick={()=>handleLike(post._id)}
+=======
+onClick={()=>handleLike(post.id)}
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Feed.jsx
 className={`w-9 h-9 flex items-center justify-center rounded-full
 ${post.liked ? "text-blue-600" : ""}
 `}

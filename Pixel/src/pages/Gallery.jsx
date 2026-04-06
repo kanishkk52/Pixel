@@ -6,12 +6,17 @@ export default function Gallery(){
 
 const navigate = useNavigate()
 
+<<<<<<< HEAD:Pixel/src/pages/Gallery.jsx
 /* 🔥 BACKEND EVENTS */
+=======
+/* ✅ LOAD FOLDERS FROM LOCAL STORAGE */
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Gallery.jsx
 
 const [events,setEvents] = useState([])
 
 useEffect(()=>{
 
+<<<<<<< HEAD:Pixel/src/pages/Gallery.jsx
 getEvents()
 .then((data)=>{
 
@@ -49,6 +54,26 @@ getEvents()
   console.error("Error fetching events:", err)
   setEvents([])
 })
+=======
+const loadFolders = () => {
+
+const stored = JSON.parse(localStorage.getItem("eventImages")) || {}
+
+/* convert object → array */
+const folders = Object.keys(stored).map((key,index)=>({
+id: key, // ✅ IMPORTANT (string id now)
+name: key,
+cover: stored[key][0] || "https://via.placeholder.com/400x300?text=No+Image"
+}))
+
+setEvents(folders)
+}
+
+loadFolders()
+
+window.addEventListener("storage", loadFolders)
+return ()=>window.removeEventListener("storage", loadFolders)
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Gallery.jsx
 
 },[])
 
@@ -128,7 +153,13 @@ transition
 {events.length === 0 ? (
 
 <p className="text-center text-gray-500">
-No events found.
+No folders yet. Create one in Manage Data 📁
+</p>
+
+) : filteredEvents.length === 0 ? (
+
+<p className="text-center text-gray-500">
+No matching folders.
 </p>
 
 ) : filteredEvents.length === 0 ? (
@@ -181,7 +212,11 @@ onError={(e)=>{
 
 {/* NAVIGATOR */}
 
+<<<<<<< HEAD:Pixel/src/pages/Gallery.jsx
 {filteredEvents.length > 0 && (
+=======
+{events.length > 0 && (
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/Gallery.jsx
 <div className="hidden md:flex fixed right-5 top-1/2 -translate-y-1/2 flex-col gap-3 z-50">
 
 {filteredEvents.map((event,index)=>(

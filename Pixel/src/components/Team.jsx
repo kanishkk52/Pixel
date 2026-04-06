@@ -19,7 +19,11 @@ name:"Aniket Ambadkar",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08641_stomxz.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449880/DSC08794_mlo3yh.jpg",
+<<<<<<< HEAD:Pixel/src/components/Team.jsx
 bio:`bio`
+=======
+bio:`Writer of Constitution`
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/components/Team.jsx
 },
 
 {
@@ -27,7 +31,11 @@ name:"Madhav Maurya",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450187/DSC08642_ofvhhe.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450195/DSC08791_lcgyvv.jpg",
+<<<<<<< HEAD:Pixel/src/components/Team.jsx
 bio:`bio`
+=======
+bio:`kala hu par dilwala hu isliye dil choote rehte hain mera`
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/components/Team.jsx
 },
 
 {
@@ -35,7 +43,11 @@ name:"Jatin Adlak",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449941/DSC08521_2_bdpmwj.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1773512341/photo3_qtudet.jpg",
+<<<<<<< HEAD:Pixel/src/components/Team.jsx
 bio:`bio`
+=======
+bio:`ek or photo dhundni padegi iski`
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/components/Team.jsx
 },
 
 {
@@ -43,7 +55,11 @@ name:"Ansh Jain",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449894/DSC08537_pz1oe8.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774449907/DSC08639_e7gc31.jpg",
+<<<<<<< HEAD:Pixel/src/components/Team.jsx
 bio:`bio`
+=======
+bio:'Img1 - eh?? | Img2 - hihihi 😁'
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/components/Team.jsx
 },
 
 {
@@ -51,7 +67,11 @@ name:"Brajesh Patel",
 title:"<Title>",
 image:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450065/DSC_0934_2_zi4wtr.jpg",
 hoverImage:"https://res.cloudinary.com/dwk329jcv/image/upload/v1774450098/IMG_5196_2_zeglb5.jpg",
+<<<<<<< HEAD:Pixel/src/components/Team.jsx
 bio:`bio`
+=======
+bio:`Event ? wo to hota rahega - tum khane pe focus karo 😋`
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/components/Team.jsx
 }
 
 ]

@@ -13,6 +13,13 @@ import FaceFilter from "./components/FaceFilter"
 import UsernameSetup from "./pages/UsernameSetup"
 import Navbar from "./components/Navbar"
 import CustomCursor from "./components/CustomCursor"
+<<<<<<< HEAD:Pixel/src/App.jsx
+=======
+import Admin from "./pages/Admin"
+import ManageData from "./components/ManageData"
+
+
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/App.jsx
 import ThemeToggle from "./components/ThemeToggle"
 
 /* 🔥 ADD THESE */
@@ -42,10 +49,17 @@ function Layout() {
         <Route path="/face-setup" element={<FaceSetup />} />
         <Route path="/face-filter" element={<FaceFilter />} />
         <Route path="/username" element={<UsernameSetup />} />
+<<<<<<< HEAD:Pixel/src/App.jsx
 
         {/* 🔥 ADD THESE ROUTES */}
         <Route path="/admin" element={<Admin />} />
         <Route path="/manage" element={<ManageData />} />
+=======
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/manage" element={<ManageData />} />
+
+
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/App.jsx
       </Routes>
     </>
   )

@@ -52,6 +52,7 @@ setSaved(!saved) // UI only (no persistence)
 
 /* 🔥 DOWNLOAD (CLOUDINARY + NORMAL URL SAFE) */
 
+<<<<<<< HEAD:Pixel/src/pages/ImageViewer.jsx
 const handleDownload = () => {
 
 /* Cloudinary */
@@ -83,6 +84,56 @@ window.URL.revokeObjectURL(url)
 
 }
 
+=======
+if(existing){
+savedPosts = savedPosts.filter(p => p.image !== image)
+setSaved(false)
+}else{
+savedPosts.push({
+id: Date.now(),
+type: "image",
+image: image
+})
+setSaved(true)
+}
+
+localStorage.setItem("pixelSaved", JSON.stringify(savedPosts))
+}
+
+/* ✅ FIXED DOWNLOAD (CLOUDINARY + LOCAL) */
+
+const handleDownload = () => {
+
+/* Cloudinary */
+if(image.includes("res.cloudinary.com")){
+const link = document.createElement("a")
+link.href = image.replace("/upload/","/upload/fl_attachment/")
+link.download = "photo.jpg"
+link.click()
+return
+}
+
+/* Local (base64) */
+fetch(image)
+.then(res => res.blob())
+.then(blob => {
+
+const url = window.URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "photo.png"
+document.body.appendChild(a)
+a.click()
+a.remove()
+
+window.URL.revokeObjectURL(url)
+
+})
+
+}
+
+>>>>>>> 8a44c1314bc00e3dc2c0691aa836cf75a52cb3a8:src/pages/ImageViewer.jsx
 return(
 
 <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
